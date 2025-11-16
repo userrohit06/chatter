@@ -36,9 +36,8 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
-      generatToken(newUser._id, res);
-
-      await newUser.save();
+      const savedUser = await newUser.save();
+      generatToken(savedUser._id, res);
 
       res.status(201).json({
         _id: newUser._id,
